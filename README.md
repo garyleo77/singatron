@@ -1,2 +1,2 @@
-# fencing-gemini-app
-Slavatron Fencing Gemini-enabled app
+# singing-gemini-app
+Singatron Singing Coach Gemini-enabled app

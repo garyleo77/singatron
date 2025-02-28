@@ -8,7 +8,7 @@ import { CompleteMultipartUploadCommandOutput } from '@aws-sdk/client-s3';
 
 @Component({
   imports: [FormsModule],
-  selector: 'fencing-gemini',
+  selector: 'singing-gemini',
   templateUrl: './fencing-gemini.component.html',
   styleUrl: './fencing-gemini.component.css'
 })
@@ -16,8 +16,8 @@ export class FencingGeminiComponent {
   userPrompt: string = '';
   generatedText: string = '';
   errorMessage: string = '';
-  videoUrl: string = ''; // Store the URL of the selected video
-  safeVideoUrl: SafeUrl | null = null; // Store the safe URL for the video
+  videoUrl: string = ''; // Store the URL of the selected recording
+  safeVideoUrl: SafeUrl | null = null; // Store the safe URL for the recording
   isLoading = false;
   file: File | null = null;
   fileSize: number | undefined;
@@ -55,15 +55,15 @@ export class FencingGeminiComponent {
     }
     this.fileSize = Math.round(this.file.size / (1024 * 1024)) || undefined;
 
-    if (this.file.type.indexOf('video') < 0) {
-      this.errorMessage = "Please select a video.";
+    if (this.file.type.indexOf('audio') < 0) {
+      this.errorMessage = "Please select an audio recording.";
       return;
     }
 
     const reader = new FileReader();
 
     reader.onload = (e: any) => {
-      this.videoUrl = e.target.result; // Store the video URL (e.g., data URL)
+      this.videoUrl = e.target.result; // Store the recording URL (e.g., data URL)
       this.safeVideoUrl = this.geminiService.bypassSecurity(this.videoUrl); // Bypass security
     };
 
@@ -74,14 +74,12 @@ export class FencingGeminiComponent {
     this.reward = 0;
     this.userPrompt = this.userResponse() || '';
     if (this.fileSize && this.fileSize > 15) {
-      this.errorMessage = `Please select a video that is less than 15 MB.  
-      Use a video a compression tool, e.g. 
-      <a href="https://itunes.apple.com/us/app/id1536338554?mt=8">Compressor</a>, before uploading the file.`;
+      this.errorMessage = `Please select a recording that is less than 15 MB.`;
       return;
     }
     this.errorMessage = '';
     if (!this.videoUrl) {
-      this.errorMessage = "Please select a video.";
+      this.errorMessage = "Please select a recording.";
       return;
     }
     this.isLoading = true;

@@ -9,7 +9,7 @@ import { FencingGeminiComponent } from './components/fencing-gemini/fencing-gemi
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'SLAVA';
+  title = 'SINGA';
   title2 = "TRON";
-  subtitle = 'AI-enabled Epee Coach'
+  subtitle = 'AI-enabled Singing Coach'
 }

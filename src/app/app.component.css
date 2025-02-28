@@ -113,11 +113,11 @@ blockquote {
 }
 
 .logo {
-  background-image: url('../media/slavatron-appicon.jpeg');
+  background-image: url('../media/singatron-appicon.png');
   background-size:cover;
   background-repeat: no-repeat;
   width: 100%;
-  height: 150px;
+  height: 200px;
   @media screen and (min-width: 431px) {
     background-size: contain;
   }

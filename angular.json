@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "fencing-gemini-app": {
+    "singing-gemini-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/fencing-gemini-app",
+            "outputPath": "dist/singing-gemini-app",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "fencing-gemini-app:build:production"
+              "buildTarget": "singing-gemini-app:build:production"
             },
             "development": {
-              "buildTarget": "fencing-gemini-app:build:development"
+              "buildTarget": "singing-gemini-app:build:development"
             }
           },
           "defaultConfiguration": "development"

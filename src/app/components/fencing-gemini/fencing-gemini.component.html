@@ -1,4 +1,4 @@
-<input type="file" id="fileChooser" name="fileSelector" accept="video/*" (change)="onFileSelected($event)" style="display: none"/> 
+<input type="file" id="fileChooser" name="fileSelector" accept=".mp3, .m4a" (change)="onFileSelected($event)" style="display: none"/> 
 <label for="fileChooser" class="multi-color-button">CHOOSE FILE (max 15MB)</label>
 <br><br>
 
@@ -15,23 +15,22 @@
   <br><br>
   <div [innerHtml]="generatedText"></div>
   <div>
-    <p>Do you have any corrections, questions or comments for coach Slavatron?
-      For example, if he chose the wrong winner or was confused as to who the left fencer was,
-      you can tell him and he will adjust his analysis.
+    <p>Do you have any corrections, questions or comments for coach Singatron?
+      For example, if she mentions the wrong song title based on the lyrics you sang, you can mention the correct title and she will adjust her analysis.
     </p>
     <textarea [(ngModel)]="userResponse" maxlength="255"></textarea>
   </div>
   <p></p>
   <button class="multi-color-button" (click)="generate()">Respond</button>
 }
-@if (generatedText && (!isProdMode || reward > 0)) {
+@if (generatedText && (isProdMode && reward < 1)) {
   <p>Please fully watch the advertisement to view the analysis.</p>
 }
 @if (errorMessage) {
   <div><p [innerHtml]="errorMessage"></p></div>
 }
 @if (isLoading) {
-  <div><p>Please wait while coach Slavatron thinks.  <br>Wi-Fi connection is recommended.</p></div>
+  <div><p>Please wait while coach Singatron thinks.  <br>Wi-Fi connection is recommended.</p></div>
   <div class="spinner">
     <div class="loading loading--full-height"></div>
   </div>

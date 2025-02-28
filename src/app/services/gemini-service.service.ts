@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser'; // For video embeddingimport { Injectable } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser'; // For audio embeddingimport { Injectable } from '@angular/core';
 import { S3Client, PutObjectCommand, CompleteMultipartUploadCommandOutput } from '@aws-sdk/client-s3';
 import { Upload } from "@aws-sdk/lib-storage";
 
@@ -23,8 +23,8 @@ interface GeminiRequest {
   prompt: {
     text: string;
   };
-  video: { // Assuming a way to represent video upload
-    // ... properties for video data (e.g., base64 string, URL)
+  audio: { // Assuming a way to represent audio upload
+    // ... properties for audio data (e.g., base64 string, URL)
     url: string; // Or base64 string, or however your API expects it.
   };
 }
@@ -48,22 +48,16 @@ export class GeminiService {
   }
 
   async generateTextWithVideo(prompt: string, fileUri: string): Promise<string> {
-    const basePrompt = `Check if you think this video is fencing video.  If not, give an eror message, and quit.
-        If it is an epee fencing video, describe this epee fencing video. 
-        If there are multiple fencers on the video, look at the fencers closest to the center of the video and closest to the camera.
-        Describe the actions of the fencers.
-        State which fencer you think lost?  Give a distinction of which fencer is which, e.g. short versus tall fencer, or the color of their shoes.  
-        Note that if a green and red light flash within 0.5 seconds of each other, then it's a double touch.
-        What kind of strategies can the losing fencer use next time to try and win?
-        Use fencing terms to describe the strategy if possible, like 'lunge' or 'fleche' or 'parry' or 'riposte'. ` + prompt;
+    const basePrompt = `Check if you think this audio recording is of someone singing.  If not, give an eror message, and quit.
+        If it is, give the name and artist that wrote the song, and say if the person's recording is good singing.  
+        If not, rate the singer from 1 to 10 (1 being worst), and say how they can improve.` + prompt;
 
     const genAI = new GoogleGenerativeAI(this.apiKey);
     const model = genAI.getGenerativeModel({
       model: "gemini-2.0-flash",
       systemInstruction: `
-        Assume the video is not upside down.
-        Answer like you are a funny but sometimes serious 60 year old Ukranian olympic coach speaking mostly good English.
-        Send a very detailed response as nicely formatted HTML with bullet points (at least 5 per fencer).
+        Answer like you are a mean and strict judge from a singing competition show, like Simon Cowell.
+        Send a very detailed response as nicely formatted HTML with bullet points (at least 5).
         Do not include the starting and ending html tags nor body tags in your response.  The first sentence should start with an <h4> tag.
         `,
       generationConfig: {
@@ -73,14 +67,14 @@ export class GeminiService {
 
     const videoPart = {
       inlineData: {
-        mimeType: 'video/mp4',
+        mimeType: 'audio/mp4',
         data: fileUri.split(',')[1]
       },
     };
     const result = await model.generateContent([basePrompt, videoPart]);
     return this.omitFirstLine(result.response.text());
   }
-  // Helper function to bypass security for video URLs (use with caution!)
+  // Helper function to bypass security for audio URLs (use with caution!)
 
   bypassSecurity(url: string): SafeUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Slavatron</string>
+	<string>Singatron</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -46,11 +46,11 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires access to the camera in case a new video is to be captured for analysis.</string>
+	<string>This app requires access to the voice recorder in case a new song is to be captured for analysis.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app requires access to your Photo Library in order to select a video to analyze.</string>
+	<string>This app requires access to your File Library in order to select a song to analyze.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>This app requires access to the microphone in order to capture audio for the video being recorded for analysis.</string>
+	<string>This app requires access to the microphone in order to capture audio for the song being recorded for analysis.</string>
 	<key>GADIsAdManagerApp</key>
 	<true/>
 	<key>GADApplicationIdentifier</key>
