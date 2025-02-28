@@ -1,0 +1,69 @@
+
+
+
+textarea {
+  width: 90%;
+  height: 150px;
+  font-size: 1.1rem;
+  background-color: #333333;
+  color: white;
+}
+
+input::file-selector-button, .multi-color-button {
+  background: linear-gradient(to right, #00d9ff, #00c4f5, #0049e6); /* Multi-color gradient */
+  color: #FFFDE7;
+  border: none;
+  padding: 14px 28px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  background-size: 200% auto; /* Key for animated gradient */
+}
+
+input::file-selector-button:hover,.multi-color-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+  background-position: right center; /* Shift gradient on hover */
+}
+
+input::file-selector-button:active, .multi-color-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-position: center; /* Reset gradient on click */
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+}
+
+.loading::after {
+  content: "";
+  width: 25px;
+  height: 25px;
+  border: 10px solid #dddddd;
+  border-top-color: #00c4f5;
+  border-radius: 50%;
+  animation: loading 1s ease infinite;
+}
+
+@keyframes loading {
+  to {
+      transform: rotate(1turn);
+  }
+}
+
+.spinner {
+  width: 150px; 
+  height: 150px; 
+  margin: auto;
+}

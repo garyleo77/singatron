@@ -1,0 +1,38 @@
+<input type="file" id="fileChooser" name="fileSelector" accept="video/*" (change)="onFileSelected($event)" style="display: none"/> 
+<label for="fileChooser" class="multi-color-button">CHOOSE FILE (max 15MB)</label>
+<br><br>
+
+@if (safeVideoUrl) {
+  <video controls width="100%" [src]="safeVideoUrl"></video> <br>
+}
+@if (fileSize) {
+  <p>File size: {{ fileSize }} MB </p>
+}
+@if (!isLoading) {
+  <button class="multi-color-button" (click)="generate()">Analyze</button>
+}
+@if (generatedText && !isLoading && !errorMessage && (!isProdMode || reward > 0)) {
+  <br><br>
+  <div [innerHtml]="generatedText"></div>
+  <div>
+    <p>Do you have any corrections, questions or comments for coach Slavatron?
+      For example, if he chose the wrong winner or was confused as to who the left fencer was,
+      you can tell him and he will adjust his analysis.
+    </p>
+    <textarea [(ngModel)]="userResponse" maxlength="255"></textarea>
+  </div>
+  <p></p>
+  <button class="multi-color-button" (click)="generate()">Respond</button>
+}
+@if (generatedText && (!isProdMode || reward > 0)) {
+  <p>Please fully watch the advertisement to view the analysis.</p>
+}
+@if (errorMessage) {
+  <div><p [innerHtml]="errorMessage"></p></div>
+}
+@if (isLoading) {
+  <div><p>Please wait while coach Slavatron thinks.  <br>Wi-Fi connection is recommended.</p></div>
+  <div class="spinner">
+    <div class="loading loading--full-height"></div>
+  </div>
+}
